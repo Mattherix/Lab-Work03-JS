@@ -1,0 +1,82 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab work 3</title>
+</head>
+
+<body>
+    <script>
+        function writeText(text) {
+            document.write("<p>" + text + "</p>");
+        }
+
+        function average(nums) {
+            if (nums.length === 0) {
+                return 0;
+            }
+
+            return nums.reduce((sum, current_number) => {
+                return sum + current_number;
+            }, 0) / nums.length;
+        }
+
+        function main() {
+            let numOfCourses = parseInt(prompt("How many courses did you finish?", "0"));
+
+            if (isNaN(numOfCourses)) {
+                writeText("Invalid input");
+                return 1;
+            }
+            writeText(numOfCourses)
+
+            let courseMarks = [];
+            let mark;
+            for (let i = 0; i < numOfCourses; i++) {
+                do {
+                    mark = parseInt(prompt("Enter your mark for course " + i));
+                } while (isNaN(mark));
+                courseMarks.push(mark);
+            }
+
+            writeText("Marks :")
+            courseMarks.forEach(mark => {
+                writeText(mark);
+            });
+
+            let mean = average(courseMarks).toFixed(2);
+            writeText(mean);
+
+            let grade = false;
+            if (mean <= 100 && mean >= 90) {
+                grade = "A+"
+            }
+            if (mean <= 89 && mean >= 80) {
+                grade = "B"
+            }
+            if (mean <= 79 && mean >= 70) {
+                grade = "C"
+            }
+            if (mean <= 60 && mean >= 69) {
+                grade = "D"
+            }
+            if (mean < 60) {
+                grade = "F"
+            }
+
+            if (grade) {
+                writeText("Your final average is " + mean + ". Your grade is " + grade);
+            } else {
+                writeText("Sorry, All the marks have to be from minimum 0 to maximum 100!");
+            }
+
+            return 0;
+        }
+
+        main()
+    </script>
+</body>
+
+</html>
